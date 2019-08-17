@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.9.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>kali模块2 | SkyWang</title><meta name="description" content="kali模块2"><meta name="keywords" content="kali irpas-ass miranda nmap"><meta name="author" content="kun wang"><meta name="copyright" content="kun wang"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="http://yoursite.com/2019/08/17/kali模块2/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="kali模块2"><meta name="twitter:description" content="kali模块2"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="kali模块2"><meta property="og:url" content="http://yoursite.com/2019/08/17/kali模块2/"><meta property="og:site_name" content="SkyWang"><meta property="og:description" content="kali模块2"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/avatar.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="next" title="kali模块" href="http://yoursite.com/2019/08/17/kali模块/"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":1,"translateDelay":0,"cookieDomain":"https://wangkun97.github.io/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: '添加书签',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天'
+
+  
+}</script></head><body><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true"></i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar"></div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#irpas-ass"><span class="toc-number">1.</span> <span class="toc-text">irpas-ass</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#使用详解"><span class="toc-number">1.1.</span> <span class="toc-text">使用详解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#miranda"><span class="toc-number">2.</span> <span class="toc-text">miranda</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UPnP"><span class="toc-number">2.1.</span> <span class="toc-text">UPnP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UPnP工作过程"><span class="toc-number">2.2.</span> <span class="toc-text">UPnP工作过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#miranda说明"><span class="toc-number">2.3.</span> <span class="toc-text">miranda说明</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Nmap"><span class="toc-number">3.</span> <span class="toc-text">Nmap</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#几种指定目标的方法"><span class="toc-number">3.1.</span> <span class="toc-text">几种指定目标的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP三次握手"><span class="toc-number">3.2.</span> <span class="toc-text">TCP三次握手</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP-UDP扫描"><span class="toc-number">3.3.</span> <span class="toc-text">TCP/UDP扫描</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#安装与使用-Python-NMAP"><span class="toc-number">3.4.</span> <span class="toc-text">安装与使用 Python NMAP</span></a></li></ol></li></ol></div></div></div><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/post.png)"><div id="page-header"><span class="pull-left"> <a class="blog_title" id="site-name" href="/">SkyWang</a></span><div class="open toggle-menu pull-right"><div class="menu-icon-first"></div><div class="menu-icon-second"></div><div class="menu-icon-third"></div></div><span class="pull-right menus"><div class="mobile_author_icon"><img class="lozad" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'"><div class="mobile_author-info__description">love and peace</div></div><hr><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-coffee"></i><span> 留言板</span></a><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right"></span></div><div id="post-info"><div id="post-title"><div class="posttitle">kali模块2</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2019-08-17<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2019-08-17</time></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h1 id="irpas-ass"><a href="#irpas-ass" class="headerlink" title="irpas-ass"></a>irpas-ass</h1><h2 id="使用详解"><a href="#使用详解" class="headerlink" title="使用详解"></a>使用详解</h2><ul>
+<li>主动模式  <blockquote>
+<p>主动发路由协议包<br>  <code>ass -i eth0 -A</code></p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>被动模式</p>
+<blockquote>
+<p>侦听路由协议的广播或者组播包<br>优点是隐蔽<br>  <code>ass -i eth0</code></p>
+</blockquote>
+</li>
+<li><p>-S 指定源地址</p>
+</li>
+<li><p>-D 制定目标地址</p>
+</li>
+<li><p>-P 制定协议</p>
+</li>
+<li><p>互联网拒绝服务攻击</p>
+<blockquote>
+<p>使用相邻AS地址攻击目标</p>
+</blockquote>
+</li>
+<li><p>路径追踪 Public AS<br>  <code>lft -A IP</code><br>  <code>lft -A 192.168.1.1</code></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">//查询路由器隶属于哪个AS</span><br><span class="line"></span><br><span class="line">lft -A www.baidu.com</span><br></pre></td></tr></table></figure>
+
+<h1 id="miranda"><a href="#miranda" class="headerlink" title="miranda"></a>miranda</h1><ul>
+<li><p>针对 UPnP 协议的扫描和攻击工具</p>
+</li>
+<li><p>Universal Plug and Play是一组网络协议</p>
+<blockquote>
+<p>适用于家庭网络（无企业级产品）<br>便于设备间无缝发现和链接，建立基本的家庭网络服务(热插拔)  </p>
+<blockquote>
+<p>文件共享、通信、娱乐<br>IGD、打印机、智能电话、网络摄像头、电视盒子、洗衣机等  </p>
+</blockquote>
+</blockquote>
+</li>
+<li><p>SSDP: Simple Service Discovery Protocol  </p>
+</li>
+<li><p>GENA: Generic Event Notification Architecture  </p>
+</li>
+<li><p>SOAP: Simple Object Access Protocol  </p>
+</li>
+<li><p>XML: Extensible Markup Language  </p>
+</li>
+</ul>
+<h2 id="UPnP"><a href="#UPnP" class="headerlink" title="UPnP"></a>UPnP</h2><ul>
+<li><p>基于IP的通信协议</p>
+</li>
+<li><p>无任何身份验证机制</p>
+</li>
+<li><p>大部分路由器支持UPnP且默认启动</p>
+</li>
+<li><p>大量设备可利用UPnP修改配置</p>
+</li>
+<li><p>爆破路由器密码不是好主意，UPnP才是</p>
+<ul>
+<li>修改DNS配置、修改密码、端口转发、动态DNS  </li>
+<li>重启设备、窃取PPPoE账号、查看或修改无线配置</li>
+</ul>
+</li>
+</ul>
+<h2 id="UPnP工作过程"><a href="#UPnP工作过程" class="headerlink" title="UPnP工作过程"></a>UPnP工作过程</h2><ul>
+<li><p>获取地址(默认基于IP协议)</p>
+</li>
+<li><p>Discovery</p>
+<ul>
+<li>REQUEST: M-SEARCH(239.255.255.250/UDP 1900)</li>
+<li>RESPONSE: 单播回包、包含 XML URL (Location 头)</li>
+</ul>
+</li>
+<li><p>NOTIFY</p>
+<ul>
+<li>通告自己的存在，239.255.255.250 /UDP 1900</li>
+<li>包含 XML URL (Location 头)</li>
+</ul>
+</li>
+<li><p>HTTP over UDP</p>
+</li>
+<li><p>Description</p>
+<ul>
+<li>读取XML文件的内容<ul>
+<li>Device</li>
+<li>Service</li>
+<li>Action</li>
+<li>Variable</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Control</p>
+<ul>
+<li>Device + service + action + Variable</li>
+</ul>
+</li>
+<li><p>以上通信使用SOAP请求实现(发包实现UPnP通信，实现对设备的利用)</p>
+</li>
+</ul>
+<h2 id="miranda说明"><a href="#miranda说明" class="headerlink" title="miranda说明"></a>miranda说明</h2><ul>
+<li><p>主动 / 被动 发现、查询、管理UPnP设备</p>
+</li>
+<li><p>基于python开发</p>
+</li>
+<li><p>独立的命令行界面</p>
+<ul>
+<li>命令行自动tab补齐、命令历史</li>
+<li>定制 SSDP 头</li>
+<li>定制网卡、IP、端口</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">seti show  </span><br><span class="line">seti iface  </span><br><span class="line">seti socket <span class="number">239.255</span><span class="number">.255</span><span class="number">.250</span>:<span class="number">190</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>msearch 主动(发包SSDP Request)</li>
+<li>pcap 被动(嗅探Notify)</li>
+<li>host list 查看发现的UPnP设备列表(索引)</li>
+<li>host get 0 查询设备类型、服务、action</li>
+<li>host info 0 显示查询到的信息内容</li>
+<li>host summary 0 显示 xml 文件摘要内容</li>
+<li>save info 0 file 保存结果信息(data / load)</li>
+</ul>
+<h1 id="Nmap"><a href="#Nmap" class="headerlink" title="Nmap"></a>Nmap</h1><ul>
+<li>Host discovery(主机发现)</li>
+<li>Service/version detection(服务于版本检测)</li>
+<li>Operating system detection(操作系统检测)</li>
+<li>Network traceroute(网络追踪)</li>
+<li>Nmap Scripting Engine(NMAP脚本引擎)</li>
+</ul>
+<h2 id="几种指定目标的方法"><a href="#几种指定目标的方法" class="headerlink" title="几种指定目标的方法"></a>几种指定目标的方法</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#Ahost为写有IP的文件</span><br><span class="line">#127.0.0.1 代表IP</span><br><span class="line">nmap -sn 127.0.0.1 127.0.0.2</span><br><span class="line">nmap -sn 127.0.0.1-100</span><br><span class="line">nmap -sn -iL Ahost</span><br><span class="line">nmap -sn 127.0.0.1/24 -exclude 127.0.0.15</span><br><span class="line">nmap -sn 127.0.0.1/24 -excludefile Ahost</span><br></pre></td></tr></table></figure>
+
+<h2 id="TCP三次握手"><a href="#TCP三次握手" class="headerlink" title="TCP三次握手"></a>TCP三次握手</h2><ul>
+<li>SYN(同步序列号，请求建立连接)</li>
+<li>ACK(针对 SYN/FIN 的确认回答)</li>
+<li>FIN(请求切断连接)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">1.客户端 发送 SYN 给服务端请求连接</span><br><span class="line">2.服务端接受请求，发送带有确认应答(ACK)和同步序列号(SYN)给客户端</span><br><span class="line">3.客户端再发送一个 ACK ，确认连接</span><br></pre></td></tr></table></figure>
+
+<h2 id="TCP-UDP扫描"><a href="#TCP-UDP扫描" class="headerlink" title="TCP/UDP扫描"></a>TCP/UDP扫描</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#TCP SYN扫描</span><br><span class="line">nmap -sS IP地址</span><br><span class="line">nmap -sS 127.0.0.1</span><br><span class="line"></span><br><span class="line">#TCP Connect扫描</span><br><span class="line">nmap -sT IP地址</span><br><span class="line">nmap -sT 127.0.0.1</span><br><span class="line"></span><br><span class="line">#TCP FIN扫描</span><br><span class="line">nmap -sF IP地址</span><br><span class="line">nmap -sF 127.0.0.1</span><br><span class="line"></span><br><span class="line">#UDP扫描，扫描时间很长，扫描效果不好</span><br><span class="line">nmap -sU IP地址</span><br><span class="line">nmap -sU 127.0.0.1</span><br><span class="line"></span><br><span class="line">#以上都是普通端口扫描</span><br><span class="line">#扫端口尽量用 -sV 扫描，时间比较长</span><br><span class="line">nmap -sV 127.0.0.1</span><br><span class="line"></span><br><span class="line">#综合扫描</span><br><span class="line">nmap -A 127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装与使用-Python-NMAP"><a href="#安装与使用-Python-NMAP" class="headerlink" title="安装与使用 Python NMAP"></a>安装与使用 Python NMAP</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#安装</span></span><br><span class="line">pip3 install python-nmap</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用，都是自己写的自动化脚本</span></span><br><span class="line">./nmap_ping_scan.py <span class="number">192.168</span><span class="number">.100</span><span class="number">.1</span>/<span class="number">24</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Python实现NMAP自动化</span></span><br><span class="line"><span class="comment">#先 Ping 后 A</span></span><br><span class="line">./nmap_A_ping_scan.py <span class="number">192.168</span><span class="number">.100</span><span class="number">.1</span>/<span class="number">24</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">zip2john demo.zip</span><br><span class="line">zip2john demo.zip &gt; hash.txt</span><br><span class="line">john --format=zip hash.txt</span><br><span class="line">john hash.txt</span><br></pre></td></tr></table></figure></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">kun wang</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://yoursite.com/2019/08/17/kali模块2/">http://yoursite.com/2019/08/17/kali模块2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://yoursite.com">SkyWang</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/kali-irpas-ass-miranda-nmap/">kali irpas-ass miranda nmap    </a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/avatar.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-buttom"><i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" data-src="/img/wechat1.jpg"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lozad post-qr-code__img" data-src="/img/alipay1.jpg"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="next-post pull-full"><a href="/2019/08/17/kali模块/"><img class="next_cover lozad" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>kali模块</span></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i> <span>评论</span></div><div id="disqus_thread"></div><script>var unused = null;
+var disqus_config = function () {
+  this.page.url = 'http://yoursite.com/2019/08/17/kali模块2/';
+  this.page.identifier = '2019/08/17/kali模块2/';
+  this.page.title = 'kali模块2';
+}
+var d = document, s = d.createElement('script');
+s.src = "https://" + 'wangkun97' +".disqus.com/embed.js";
+s.setAttribute('data-timestamp', '' + +new Date());
+(d.head || d.body).appendChild(s);</script></div></div></div><footer><div class="layout" id="footer"><div class="copyright">&copy;2018 - 2019 By kun wang</div><div class="framework-info"><span>驱动 </span><a href="http://hexo.io"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly"><span>Butterfly</span></a></div><div class="footer_custom_text">Slow Down Turbo</div></div></footer><i class="fa fa-arrow-up" id="go-up" aria-hidden="true"></i><section class="rightside" id="rightside"><i class="fa fa-book" id="readmode" title="阅读模式"> </i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换">簡</a><i class="fa fa-moon-o nightshift" id="nightshift" title="夜间模式"></i></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/nightshift.js"></script><script id="ribbon" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/js/piao.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script></body></html>
